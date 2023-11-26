@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import CardList from "./robo/CardList"
 import SearchBox from "./robo/SearchBox";
 import './App.css';
+import Scroll from "./Scroll";
 
 //to use state we must declare class components
 
@@ -31,15 +32,23 @@ export class App extends Component {
             return robot.name.toLowerCase()
             .includes(this.state.searchField.toLowerCase());
         });
-
-        return (
-            <div className="tc">
-                <h1 className="f1">RoboFriends</h1>
-                <SearchBox searchChange = {this.onSearchChange}/>
-                <CardList robots = {filteredRobots}/>
-            </div>
-            
-        );
+        if(this.state.robots.length === 0){
+            return(
+                <h1 className="f1">Loading.....</h1>
+            );
+        }else{
+            return (
+                <div className="tc">
+                    <h1 className="f1">RoboFriends</h1>
+                    <SearchBox searchChange = {this.onSearchChange}/>
+                    <Scroll>
+                        <CardList robots = {filteredRobots}/>
+                    </Scroll>
+                    
+                </div>
+                
+            );
+        }
     }
 }
 
