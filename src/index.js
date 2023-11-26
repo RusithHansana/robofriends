@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Hello from './Hello';
+import Card from './robo/Card';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons'; //css library similar to bootstrap
+import {robots} from './robo/robots';
 
+const robot = robots[0];
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Hello greeting = {'Welcome to React World!'}/> {/* This is props similar to passsing parameters to classes. We can
+    <Card id = {robot.id} name = {robot.name} email = {robot.email}/> {/* This is props similar to passsing parameters to classes. We can
                                                       use this props in Hello.js file*/}
   </React.StrictMode>
 );
