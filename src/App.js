@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import CardList from "./robo/CardList"
-import {robots} from "./robo/robots"
 import SearchBox from "./robo/SearchBox";
 import './App.css';
 
@@ -10,17 +9,25 @@ export class App extends Component {
     constructor(){
         super()
         this.state = {
-            robots: robots,
+            robots: [],
             searchField: '',
         }
     }
 
+    componentDidMount(){
+        //this is a react life cycle method
+        //executes after first time rendering the app
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(users =>this.setState({robots: users}));
+    }
+    
     onSearchChange = (event) =>{
         this.setState({searchField: event.target.value});
     }
     
     render(){
-        const filteredRobots = this.state.robots.filter(robot =>{
+        const filteredRobots = this.state.robots.filter(robot => {
             return robot.name.toLowerCase()
             .includes(this.state.searchField.toLowerCase());
         });
