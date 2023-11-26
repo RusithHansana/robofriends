@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import CardList from "./robo/CardList"
-import SearchBox from "./robo/SearchBox";
+import CardList from "../components/robo/CardList";
+import SearchBox from "../components/robo/SearchBox";
 import './App.css';
-import Scroll from "./Scroll";
+import Scroll from "../components/Scroll";
 
 //to use state we must declare class components
 
@@ -28,27 +28,22 @@ export class App extends Component {
     }
     
     render(){
-        const filteredRobots = this.state.robots.filter(robot => {
+        const { robots, searchField} = this.state;
+        const filteredRobots = robots.filter(robot => {
             return robot.name.toLowerCase()
-            .includes(this.state.searchField.toLowerCase());
+            .includes(searchField.toLowerCase());
         });
-        if(this.state.robots.length === 0){
-            return(
-                <h1 className="f1">Loading.....</h1>
-            );
-        }else{
-            return (
-                <div className="tc">
-                    <h1 className="f1">RoboFriends</h1>
-                    <SearchBox searchChange = {this.onSearchChange}/>
-                    <Scroll>
-                        <CardList robots = {filteredRobots}/>
-                    </Scroll>
-                    
-                </div>
-                
-            );
-        }
+         return !robots.length?
+                <h1 className="f1">Loading.....</h1> :
+                (
+                    <div className="tc">
+                        <h1 className="f1">RoboFriends</h1>
+                        <SearchBox searchChange = {this.onSearchChange}/>
+                        <Scroll>
+                            <CardList robots = {filteredRobots}/>
+                        </Scroll>   
+                    </div>
+                )
     }
 }
 
