@@ -67,7 +67,8 @@ function App() {
     //this tells that when changes happen to the this argument then run use effect
     //in this cas we use an empty array which is the initial state
     //better to use initial state otherwise this will run everytime when a change happens to the argument
-    },[]); 
+    },[]); // [robots] this means run use effect every time a change happen to robots
+    
 
 
     const filteredRobots = robots.filter(robot => {
